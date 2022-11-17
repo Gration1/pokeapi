@@ -1,0 +1,7 @@
+{
+    "phpVersion": "8.1",
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "all",
+    "printWidth": 200
+}
