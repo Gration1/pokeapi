@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Business Services
+        $this->app->bind(\App\Services\Pokemon\PokemonServiceInterface::class, \App\Services\Pokemon\PokemonService::class);
+
+        // Repositories
+        $this->app->bind(\App\Repositories\Pokemon\PokemonRepositoryInterface::class, \App\Repositories\Pokemon\PokemonRepository::class);
     }
 
     /**
@@ -23,6 +27,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 }
