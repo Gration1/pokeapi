@@ -27,6 +27,11 @@ class PokemonRepository implements PokemonRepositoryInterface
         DB::table('pokemon')->upsert($mappedData, ['order'], ['name', 'types', 'height', 'weight', 'moves', 'order', 'species', 'stats', 'abilities', 'form', 'updated_at']);
     }
 
+    public function get(int $id): ?Pokemon
+    {
+        return Pokemon::find($id);
+    }
+
     public function getMultipleByOrder(array $orders): Collection
     {
         return Pokemon::whereIn('order', $orders)->get();

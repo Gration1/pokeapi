@@ -6,11 +6,21 @@ use App\Data\Pokemon\PokemonSpriteData;
 use App\Models\Pokemon;
 use App\Repositories\Pokemon\PokemonRepositoryInterface;
 use Illuminate\Support\Arr;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PokemonService implements PokemonServiceInterface
 {
     public function __construct(protected PokemonRepositoryInterface $pokemonRepository)
     {
+    }
+
+    public function get(int $id): Pokemon
+    {
+        $pokemon = $this->pokemonRepository->get($id);
+        if ($pokemon === null) {
+            throw new HttpException(404, 'Pokemon not found');
+        }
+        return $pokemon;
     }
 
     public function import(array $pokemonCreateData): void
