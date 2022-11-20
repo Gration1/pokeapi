@@ -5,7 +5,7 @@ namespace App\Services\Pokemon;
 interface PokemonServiceInterface
 {
     /**
-     * @param \App\Data\PokemonCreateData[] $pokemonCreateData
+     * @param \App\Data\Pokemon\PokemonCreateData[] $pokemonCreateData
      */
     function import(array $pokemonCreateData): void;
 }
