@@ -2,10 +2,12 @@
 
 namespace App\Services\Pokemon;
 
+use App\Data\Pokemon\PokemonIndexData;
 use App\Data\Pokemon\PokemonSpriteData;
 use App\Models\Pokemon;
 use App\Repositories\Pokemon\PokemonRepositoryInterface;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PokemonService implements PokemonServiceInterface
@@ -21,6 +23,11 @@ class PokemonService implements PokemonServiceInterface
             throw new HttpException(404, 'Pokemon not found');
         }
         return $pokemon;
+    }
+
+    public function index(PokemonIndexData $data): Collection
+    {
+        return $this->pokemonRepository->all($data->sort);
     }
 
     public function import(array $pokemonCreateData): void

@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -46,5 +48,6 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(fn(HttpException $e) => new JsonResponse(['error' => $e->getStatusCode(), 'error_message' => $e->getMessage()], $e->getStatusCode()));
+        $this->renderable(fn(ValidationException $e) => new JsonResponse(['error' => 422, 'error_message' => $e->getMessage()], 422));
     }
 }
