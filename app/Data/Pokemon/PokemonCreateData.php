@@ -10,6 +10,7 @@ class PokemonCreateData extends Data
 {
     public function __construct(
         public string $name,
+        public PokemonSpriteData $sprites,
         #[DataCollectionOf(PokemonTypeData::class)] public DataCollection $types,
         public int $height,
         public int $weight,

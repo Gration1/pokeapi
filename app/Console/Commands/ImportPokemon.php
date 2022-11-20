@@ -6,6 +6,7 @@ use App\Data\Pokemon\PokemonAbilityData;
 use App\Data\Pokemon\PokemonCreateData;
 use App\Data\Pokemon\PokemonMoveData;
 use App\Data\Pokemon\PokemonMoveVersionGroupDetail;
+use App\Data\Pokemon\PokemonSpriteData;
 use App\Data\Pokemon\PokemonStatData;
 use App\Data\Pokemon\PokemonTypeData;
 use App\Services\Pokemon\PokemonServiceInterface;
@@ -59,6 +60,16 @@ class ImportPokemon extends Command
         return array_map(
             fn($dataEntry) => new PokemonCreateData(
                 name: $dataEntry->name,
+                sprites: new PokemonSpriteData(
+                    front_default: $dataEntry->sprites->front_default,
+                    front_female: $dataEntry->sprites->front_female,
+                    front_shiny: $dataEntry->sprites->front_shiny,
+                    front_shiny_female: $dataEntry->sprites->front_shiny_female,
+                    back_default: $dataEntry->sprites->back_default,
+                    back_female: $dataEntry->sprites->back_female,
+                    back_shiny: $dataEntry->sprites->back_shiny,
+                    back_shiny_female: $dataEntry->sprites->back_shiny_female,
+                ),
                 types: PokemonTypeData::collection(
                     array_map(
                         fn($type) => [

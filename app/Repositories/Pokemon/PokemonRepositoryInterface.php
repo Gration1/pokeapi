@@ -2,10 +2,18 @@
 
 namespace App\Repositories\Pokemon;
 
+use Illuminate\Support\Collection;
+
 interface PokemonRepositoryInterface
 {
     /**
      * @param \App\Data\Pokemon\PokemonCreateData[] $createData
      */
     function upsert(array $createData): void;
+
+    /**
+     * @param int[] $orders
+     * @return Collection<\App\Models\Pokemon>
+     */
+    function getMultipleByOrder(array $orders): Collection;
 }
