@@ -10,6 +10,7 @@ use Spatie\LaravelData\DataCollection;
 class PokemonDetailedResponseData extends Data
 {
     public function __construct(
+        public int $id,
         public string $name,
         public PokemonSpriteData $sprites,
         #[DataCollectionOf(PokemonTypeData::class)] public DataCollection $types,
@@ -27,6 +28,7 @@ class PokemonDetailedResponseData extends Data
     public static function fromModel(Pokemon $pokemon): self
     {
         return new self(
+            id: $pokemon->id,
             name: $pokemon->name,
             sprites: new PokemonSpriteData(
                 front_default: $pokemon->getFirstMedia('front_default')?->getUrl(),
