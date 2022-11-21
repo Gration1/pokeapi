@@ -16,4 +16,9 @@ class V1TeamsController extends Controller
     {
         return TeamResponseData::fromModel($this->teamService->create($data));
     }
+
+    public function get(int $id): TeamResponseData
+    {
+        return TeamResponseData::from($this->teamService->get($id));
+    }
 }

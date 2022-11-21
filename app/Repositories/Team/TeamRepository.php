@@ -12,6 +12,11 @@ class TeamRepository implements TeamRepositoryInterface
         return new Team($data->toArray());
     }
 
+    public function get(int $id): ?Team
+    {
+        return Team::with('pokemon')->find($id);
+    }
+
     public function save(Team $team): void
     {
         $team->save();

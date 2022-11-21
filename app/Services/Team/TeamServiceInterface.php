@@ -8,4 +8,5 @@ use App\Models\Team;
 interface TeamServiceInterface
 {
     function create(TeamCreateData $data): Team;
+    function get(int $id): Team;
 }
