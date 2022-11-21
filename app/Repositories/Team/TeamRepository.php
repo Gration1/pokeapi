@@ -4,6 +4,7 @@ namespace App\Repositories\Team;
 
 use App\Data\Team\TeamCreateData;
 use App\Models\Team;
+use Illuminate\Support\Collection;
 
 class TeamRepository implements TeamRepositoryInterface
 {
@@ -15,6 +16,11 @@ class TeamRepository implements TeamRepositoryInterface
     public function get(int $id): ?Team
     {
         return Team::with('pokemon')->find($id);
+    }
+
+    public function all(): Collection
+    {
+        return Team::with('pokemon')->get();
     }
 
     public function save(Team $team): void
