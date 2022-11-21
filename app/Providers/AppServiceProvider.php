@@ -15,9 +15,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // Business Services
         $this->app->bind(\App\Services\Pokemon\PokemonServiceInterface::class, \App\Services\Pokemon\PokemonService::class);
+        $this->app->bind(\App\Services\Team\TeamServiceInterface::class, \App\Services\Team\TeamService::class);
 
         // Repositories
         $this->app->bind(\App\Repositories\Pokemon\PokemonRepositoryInterface::class, \App\Repositories\Pokemon\PokemonRepository::class);
+        $this->app->bind(\App\Repositories\Team\TeamRepositoryInterface::class, \App\Repositories\Team\TeamRepository::class);
     }
 
     /**

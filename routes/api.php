@@ -21,6 +21,8 @@ Route::prefix('v1')->group(function () {
     Route::get('pokemons/{id}', 'App\Http\Controllers\V1PokemonController@get');
     Route::get('pokemons', 'App\Http\Controllers\V1PokemonController@index');
     Route::get('search', 'App\Http\Controllers\V1PokemonController@search');
+
+    Route::post('teams', 'App\Http\Controllers\V1TeamsController@create');
 });
 
 Route::prefix('v2')->group(function () {
