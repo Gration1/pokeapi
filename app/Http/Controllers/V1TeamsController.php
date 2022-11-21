@@ -12,7 +12,7 @@ class V1TeamsController extends Controller
     {
     }
 
-    public function create(TeamCreateData $data)
+    public function create(TeamCreateData $data): TeamResponseData
     {
         return TeamResponseData::fromModel($this->teamService->create($data));
     }
