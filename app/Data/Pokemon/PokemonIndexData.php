@@ -10,7 +10,6 @@ use Spatie\LaravelData\Data;
 
 class PokemonIndexData extends Data
 {
-    public $a;
     public function __construct(#[In(['name-asc', 'name-desc', 'id-asc', 'id-desc']), WithCast(EnumCast::class)] public ?PokemonSort $sort = null)
     {
     }
