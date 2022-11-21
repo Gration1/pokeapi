@@ -3,6 +3,7 @@
 namespace App\Services\Team;
 
 use App\Data\Team\TeamCreateData;
+use App\Data\Team\TeamUpdateData;
 use App\Models\Team;
 use App\Repositories\Team\TeamRepositoryInterface;
 use Illuminate\Support\Collection;
@@ -34,6 +35,14 @@ class TeamService implements TeamServiceInterface
         if ($team === null) {
             throw new HttpException(404, 'Team not found');
         }
+
+        return $team;
+    }
+
+    public function update(int $id, TeamUpdateData $data): Team
+    {
+        $team = $this->get($id);
+        $team->pokemon()->sync($data->pokemons);
 
         return $team;
     }

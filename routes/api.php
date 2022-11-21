@@ -25,6 +25,7 @@ Route::prefix('v1')->group(function () {
     Route::post('teams', 'App\Http\Controllers\V1TeamsController@create');
     Route::get('teams', 'App\Http\Controllers\V1TeamsController@index');
     Route::get('teams/{id}', 'App\Http\Controllers\V1TeamsController@get');
+    Route::post('teams/{id}', 'App\Http\Controllers\V1TeamsController@update');
 });
 
 Route::prefix('v2')->group(function () {

@@ -3,6 +3,7 @@
 namespace App\Repositories\Team;
 
 use App\Data\Team\TeamCreateData;
+use App\Data\Team\TeamUpdateData;
 use App\Models\Team;
 use Illuminate\Support\Collection;
 
