@@ -17,6 +17,6 @@ class Team extends Model
 
     public function pokemon(): BelongsToMany
     {
-        return $this->belongsToMany(Pokemon::class);
+        return $this->belongsToMany(Pokemon::class)->withTimestamps();
     }
 }
