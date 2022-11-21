@@ -22,3 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::get('pokemons', 'App\Http\Controllers\V1PokemonController@index');
     Route::get('search', 'App\Http\Controllers\V1PokemonController@search');
 });
+
+Route::prefix('v2')->group(function () {
+    Route::get('pokemons', 'App\Http\Controllers\V2PokemonController@index')->name('v2-pokemon-index');
+});

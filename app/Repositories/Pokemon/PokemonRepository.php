@@ -3,9 +3,13 @@
 namespace App\Repositories\Pokemon;
 
 use App\Data\Pokemon\PokemonCreateData;
+use App\Data\Pokemon\PokemonPaginatedData;
+use App\Data\Pokemon\PokemonPaginatedIndexData;
+use App\Data\Pokemon\PokemonResponseData;
 use App\Data\Pokemon\PokemonSearchData;
 use App\Enums\PokemonSort;
 use App\Models\Pokemon;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -32,19 +36,21 @@ class PokemonRepository implements PokemonRepositoryInterface
     public function all(?PokemonSort $sort = null): Collection
     {
         $baseQuery = Pokemon::with('media');
-        if ($sort === PokemonSort::idAsc) {
-            return $baseQuery->orderBy('id')->get();
-        }
-        if ($sort === PokemonSort::idDesc) {
-            return $baseQuery->orderByDesc('id')->get();
-        }
-        if ($sort === PokemonSort::nameAsc) {
-            return $baseQuery->orderBy('name')->get();
-        }
-        if ($sort === PokemonSort::nameDesc) {
-            return $baseQuery->orderByDesc('name')->get();
-        }
-        return $baseQuery->get();
+
+        return $this->sortQuery($baseQuery, $sort)->get();
+    }
+
+    public function paginated(?PokemonPaginatedIndexData $data): PokemonPaginatedData
+    {
+        $total = Pokemon::with('media')->count();
+        $data = $this->sortQuery(
+            Pokemon::with('media')
+                ->skip($data->offset)
+                ->take($data->limit ?? 10),
+            $data->sort,
+        )->get();
+
+        return new PokemonPaginatedData(PokemonResponseData::collection($data), $total);
     }
 
     public function get(int $id): ?Pokemon
@@ -64,5 +70,22 @@ class PokemonRepository implements PokemonRepositoryInterface
             return $query->get();
         }
         return $query->take($data->limit)->get();
+    }
+
+    private function sortQuery(Builder $query, ?PokemonSort $sort): Builder
+    {
+        if ($sort === PokemonSort::idAsc) {
+            return $query->orderBy('id');
+        }
+        if ($sort === PokemonSort::idDesc) {
+            return $query->orderByDesc('id');
+        }
+        if ($sort === PokemonSort::nameAsc) {
+            return $query->orderBy('name');
+        }
+        if ($sort === PokemonSort::nameDesc) {
+            return $query->orderByDesc('name');
+        }
+        return $query;
     }
 }

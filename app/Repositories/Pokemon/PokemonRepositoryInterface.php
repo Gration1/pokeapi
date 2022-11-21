@@ -2,9 +2,12 @@
 
 namespace App\Repositories\Pokemon;
 
+use App\Data\Pokemon\PokemonPaginatedData;
+use App\Data\Pokemon\PokemonPaginatedIndexData;
 use App\Data\Pokemon\PokemonSearchData;
 use App\Enums\PokemonSort;
 use App\Models\Pokemon;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 interface PokemonRepositoryInterface
@@ -31,4 +34,9 @@ interface PokemonRepositoryInterface
      * @return Collection<\App\Models\Pokemon>
      */
     function search(PokemonSearchData $data): Collection;
+
+    /**
+     * @return LengthAwarePaginator<\App\Models\Pokemon>
+     */
+    function paginated(?PokemonPaginatedIndexData $data): PokemonPaginatedData;
 }
