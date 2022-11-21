@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 
 class TeamResponseData extends Data
 {
-    public function __construct(public int $id, public string $name, array $pokemons)
+    public function __construct(public int $id, public string $name, public array $pokemons)
     {
     }
 
