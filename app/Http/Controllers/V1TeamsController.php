@@ -12,6 +12,7 @@ class V1TeamsController extends Controller
 {
     public function __construct(public TeamServiceInterface $teamService)
     {
+        $this->middleware('auth');
     }
 
     public function index(): DataCollection
