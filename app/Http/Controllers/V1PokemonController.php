@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\Pokemon\PokemonDetailedResponseData;
 use App\Data\Pokemon\PokemonIndexData;
 use App\Data\Pokemon\PokemonResponseData;
+use App\Data\Pokemon\PokemonSearchData;
 use App\Services\Pokemon\PokemonServiceInterface;
 
 class V1PokemonController extends Controller
@@ -22,6 +23,12 @@ class V1PokemonController extends Controller
     public function index(PokemonIndexData $data)
     {
         $pokemon = $this->pokemonService->index($data);
+        return PokemonResponseData::collection($pokemon);
+    }
+
+    public function search(PokemonSearchData $data)
+    {
+        $pokemon = $this->pokemonService->search($data);
         return PokemonResponseData::collection($pokemon);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories\Pokemon;
 
 use App\Data\Pokemon\PokemonCreateData;
+use App\Data\Pokemon\PokemonSearchData;
 use App\Enums\PokemonSort;
 use App\Models\Pokemon;
 use Illuminate\Support\Collection;
@@ -54,5 +55,14 @@ class PokemonRepository implements PokemonRepositoryInterface
     public function getMultipleByOrder(array $orders): Collection
     {
         return Pokemon::whereIn('order', $orders)->get();
+    }
+
+    public function search(PokemonSearchData $data): Collection
+    {
+        $query = Pokemon::search($data->query);
+        if ($data->limit === null) {
+            return $query->get();
+        }
+        return $query->take($data->limit)->get();
     }
 }

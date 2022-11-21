@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Pokemon;
 
+use App\Data\Pokemon\PokemonSearchData;
 use App\Enums\PokemonSort;
 use App\Models\Pokemon;
 use Illuminate\Support\Collection;
@@ -25,4 +26,9 @@ interface PokemonRepositoryInterface
      * @return Collection<\App\Models\Pokemon>
      */
     function getMultipleByOrder(array $orders): Collection;
+
+    /**
+     * @return Collection<\App\Models\Pokemon>
+     */
+    function search(PokemonSearchData $data): Collection;
 }

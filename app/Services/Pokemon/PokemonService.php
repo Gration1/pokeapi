@@ -3,6 +3,7 @@
 namespace App\Services\Pokemon;
 
 use App\Data\Pokemon\PokemonIndexData;
+use App\Data\Pokemon\PokemonSearchData;
 use App\Data\Pokemon\PokemonSpriteData;
 use App\Models\Pokemon;
 use App\Repositories\Pokemon\PokemonRepositoryInterface;
@@ -23,6 +24,11 @@ class PokemonService implements PokemonServiceInterface
             throw new HttpException(404, 'Pokemon not found');
         }
         return $pokemon;
+    }
+
+    public function search(PokemonSearchData $data): Collection
+    {
+        return $this->pokemonRepository->search($data);
     }
 
     public function index(PokemonIndexData $data): Collection

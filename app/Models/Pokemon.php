@@ -8,13 +8,14 @@ use App\Data\Pokemon\PokemonStatData;
 use App\Data\Pokemon\PokemonTypeData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\LaravelData\DataCollection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Pokemon extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, Searchable;
 
     protected $fillable = ['name', 'types', 'height', 'weight', 'moves', 'order', 'species', 'stats', 'abilities', 'form'];
 
@@ -35,5 +36,12 @@ class Pokemon extends Model implements HasMedia
         $this->addMediaCollection('back_female')->singleFile();
         $this->addMediaCollection('back_shiny')->singleFile();
         $this->addMediaCollection('back_shiny_female')->singleFile();
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+        ];
     }
 }
